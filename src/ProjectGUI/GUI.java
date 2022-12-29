@@ -1,5 +1,8 @@
 package ProjectGUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -8,15 +11,20 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class GUI {
+import Function.FunctionFile;
+
+
+public class GUI implements ActionListener {
 	
 	// jFrame icerisine buton vs koymamıza yarıyo
-	JFrame window;
-	JTextArea textArea;
-	JScrollPane scrollPane;
-	JMenuBar menuBar;
-	JMenu fileMenu , menuEdit, menuFormat, menuColor;
-	JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
+	public JFrame window;
+	public JTextArea textArea;
+	public JScrollPane scrollPane;
+	public JMenuBar menuBar;
+	public JMenu fileMenu , menuEdit, menuFormat, menuColor;
+	public JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
+	
+	FunctionFile funcs = new FunctionFile(this);
 	
 	public static void main(String[] args) {
 		
@@ -68,7 +76,12 @@ public class GUI {
 	public void createFileMenu() {
 		itemNew = new JMenuItem("New");
 		fileMenu.add(itemNew);
+		itemNew.addActionListener(this);
+		itemNew.setActionCommand("New");
+		
 		itemOpen = new JMenuItem("Open");
+		itemOpen.addActionListener(this);
+		itemOpen.setActionCommand("Open");
 		fileMenu.add(itemOpen);
 		
 		itemSave = new JMenuItem("Save");
@@ -78,6 +91,19 @@ public class GUI {
 		fileMenu.add(itemSaveAs);
 		itemExit = new JMenuItem("Exit");
 		fileMenu.add(itemExit);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+		
+		switch(command) {
+		
+		case "New" : funcs.newFile(); break;  
+		case "Open" : funcs.Open(); break;
+		}
+		
+		
 	}
 	
 
