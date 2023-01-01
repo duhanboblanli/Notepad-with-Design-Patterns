@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.undo.UndoManager;
 
 public class GUI implements ActionListener {
 	
@@ -21,6 +22,11 @@ public class GUI implements ActionListener {
 	public JMenu fileMenu , menuEdit, menuFormat, menuColor;
 	public JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
 	
+/*	public JMenuItem iUndo, iRedo;
+	
+	UndoManager um = new UndoManager();*/
+	
+	
 	FunctionFile funcs = new FunctionFile(this);
 	
 	Command openCommand = new OpenFile(funcs);
@@ -29,10 +35,7 @@ public class GUI implements ActionListener {
 	Command SaveAsCommand = new SaveAsFile(funcs);
 	Command SaveCommand = new SaveFile(funcs);
 	
-	
 	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand);
-	
-	
 	
 	
 	public static void main(String[] args) {
@@ -41,7 +44,6 @@ public class GUI implements ActionListener {
 
 	public GUI() {
 		
-	
 		createWindow();
 		createTextArea();
 		createMenuBar();
@@ -108,6 +110,18 @@ public class GUI implements ActionListener {
 		itemExit.setActionCommand("Exit");
 		fileMenu.add(itemExit);
 	}
+	
+	/*public void createEditMenu() {
+		iUndo = new JMenuItem("Undo");
+		iUndo.addActionListener(this);
+		iUndo.setActionCommand("iUndo");
+		menuEdit.add(iUndo);
+		
+		iRedo = new JMenuItem("Redo");
+		iRedo.addActionListener(this);
+		iRedo.setActionCommand("Redo");
+		menuEdit.add(iRedo);
+	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -121,8 +135,6 @@ public class GUI implements ActionListener {
 		case "Save" : button.SaveFile(); break;
 		case "Exit" : button.ExitFile(); break;
 		}
-		
-		
 	}
 	
 

@@ -11,6 +11,8 @@ public class FunctionFile implements Functions{
 	String fileName;
 	String fileAdress;
 	
+	
+	
 
 	public FunctionFile(GUI gui) {
 		this.gui = gui;
