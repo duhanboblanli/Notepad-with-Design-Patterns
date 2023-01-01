@@ -14,19 +14,23 @@ import javax.swing.undo.UndoManager;
 
 public class GUI implements ActionListener {
 	
-	// jFrame icerisine buton vs koymamıza yarıyo
+	// used to edit jFrame window(e.g. adding a button)
 	public JFrame window;
+	// multi-line area that displays plain text
 	public JTextArea textArea;
+	// to add scrolling functionality on window frame 
 	public JScrollPane scrollPane;
+	// to add topMenuBar
 	public JMenuBar menuBar;
 	public JMenu fileMenu , menuEdit, menuFormat, menuColor;
+	// these items can be added to topMenuBar
 	public JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
 	
 /*	public JMenuItem iUndo, iRedo;
 	
 	UndoManager um = new UndoManager();*/
 	
-	
+	// integration between Function File and GUI classes
 	FunctionFile funcs = new FunctionFile(this);
 	
 	Command openCommand = new OpenFile(funcs);
@@ -41,7 +45,8 @@ public class GUI implements ActionListener {
 	public static void main(String[] args) {
 		new GUI();
 	}
-
+	
+	// empty constructor method
 	public GUI() {
 		
 		createWindow();
@@ -53,8 +58,9 @@ public class GUI implements ActionListener {
 	
 	public void createWindow() {
 		
-		window = new JFrame("notepad");
+		window = new JFrame("Notepad");
 		window.setSize(800,600);
+		// press 'X' button to close window
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
@@ -62,6 +68,7 @@ public class GUI implements ActionListener {
 	public void createTextArea() {
 		textArea = new JTextArea();
 		scrollPane = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		// clear frame border
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		window.add(scrollPane);
 	}
