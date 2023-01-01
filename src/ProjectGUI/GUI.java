@@ -10,6 +10,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
 public class GUI implements ActionListener {
@@ -25,10 +27,8 @@ public class GUI implements ActionListener {
 	public JMenu fileMenu , menuEdit, menuFormat, menuColor;
 	// these items can be added to topMenuBar
 	public JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
-	
-/*	public JMenuItem iUndo, iRedo;
-	
-	UndoManager um = new UndoManager();*/
+	// edit menu items
+    public JMenuItem iUndo, iRedo;
 	
 	// integration between Function File and GUI classes
 	FunctionFile funcs = new FunctionFile(this);
@@ -38,9 +38,11 @@ public class GUI implements ActionListener {
 	Command exitCommand = new ExitFile(funcs);
 	Command SaveAsCommand = new SaveAsFile(funcs);
 	Command SaveCommand = new SaveFile(funcs);
+	Command UndoCommand = new UndoFile(funcs);
+	Command RedoCommand = new RedoFile(funcs);
 	
-	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand);
-	
+	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand,UndoCommand,RedoCommand);
+	UndoManager um = new UndoManager();
 	
 	public static void main(String[] args) {
 		new GUI();
@@ -53,6 +55,7 @@ public class GUI implements ActionListener {
 		createTextArea();
 		createMenuBar();
 		createFileMenu();
+		createEditMenu();
 		window.setVisible(true);
 	}
 	
@@ -67,6 +70,16 @@ public class GUI implements ActionListener {
 	
 	public void createTextArea() {
 		textArea = new JTextArea();
+		
+		//undoManager() functionality added to textArea
+		textArea.getDocument().addUndoableEditListener(
+				new UndoableEditListener() {
+			@Override
+			public void undoableEditHappened(UndoableEditEvent e) {
+				um.addEdit(e.getEdit());
+			}
+		});
+		
 		scrollPane = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		// clear frame border
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -118,17 +131,17 @@ public class GUI implements ActionListener {
 		fileMenu.add(itemExit);
 	}
 	
-	/*public void createEditMenu() {
+	public void createEditMenu() {
 		iUndo = new JMenuItem("Undo");
 		iUndo.addActionListener(this);
-		iUndo.setActionCommand("iUndo");
+		iUndo.setActionCommand("Undo");
 		menuEdit.add(iUndo);
 		
 		iRedo = new JMenuItem("Redo");
 		iRedo.addActionListener(this);
 		iRedo.setActionCommand("Redo");
 		menuEdit.add(iRedo);
-	}*/
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -141,6 +154,8 @@ public class GUI implements ActionListener {
 		case "Save As" : button.SaveAsFile(); break;
 		case "Save" : button.SaveFile(); break;
 		case "Exit" : button.ExitFile(); break;
+		case "Undo": button.UndoFile(); break;
+		case "Redo": button.RedoFile(); break;
 		}
 	}
 	
