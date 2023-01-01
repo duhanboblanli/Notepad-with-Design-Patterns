@@ -1,13 +1,13 @@
 package ProjectGUI;
 
 public class CommandButton {
+	
 	Command Open;
 	Command newCommand;
 	Command Save;
 	Command SaveAs;
 	Command Exit;
 	
-
 	public CommandButton(Command openCommand, Command newCommand, Command saveCommand, Command saveAsCommand, Command exitCommand) {
 		this.Open = openCommand;
 		this.newCommand = newCommand; 

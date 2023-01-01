@@ -6,4 +6,5 @@
  *
  */
 module ObjectOrientedProject {
+	requires java.desktop;
 }
