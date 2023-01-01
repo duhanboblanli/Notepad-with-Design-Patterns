@@ -23,6 +23,18 @@ public class GUI implements ActionListener {
 	
 	FunctionFile funcs = new FunctionFile(this);
 	
+	Command openCommand = new OpenFile(funcs);
+	Command newCommand = new NewFile(funcs);
+	Command exitCommand = new ExitFile(funcs);
+	Command SaveAsCommand = new SaveAsFile(funcs);
+	Command SaveCommand = new SaveFile(funcs);
+	
+	
+	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand);
+	
+	
+	
+	
 	public static void main(String[] args) {
 		new GUI();
 	}
@@ -102,12 +114,12 @@ public class GUI implements ActionListener {
 		String command = e.getActionCommand();
 		
 		switch(command) {
-		
-		case "New" : funcs.newFile(); break;  
-		case "Open" : funcs.Open(); break;
-		case "Save As" : funcs.saveAs(); break;
-		case "Save" : funcs.save();; break;
-		case "Exit" : funcs.exit();; break;
+		 
+		case "New" : button.NewFile();; break;  
+		case "Open" : button.OpenFile();; break;
+		case "Save As" : button.SaveAsFile(); break;
+		case "Save" : button.SaveFile(); break;
+		case "Exit" : button.ExitFile(); break;
 		}
 		
 		

@@ -23,7 +23,7 @@ public class FunctionFile implements Functions{
 		fileAdress = null;
 	}
 	
-	public void Open() {
+	public void open() {
 		FileDialog fd = new FileDialog(gui.window,"Open",FileDialog.LOAD);
 		fd.setVisible(true);
 		
