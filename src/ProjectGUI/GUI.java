@@ -11,9 +11,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import Function.FunctionFile;
-
-
 public class GUI implements ActionListener {
 	
 	// jFrame icerisine buton vs koymamıza yarıyo
@@ -26,14 +23,26 @@ public class GUI implements ActionListener {
 	
 	FunctionFile funcs = new FunctionFile(this);
 	
+	private static GUI guiInstance = null;
+	
 	public static void main(String[] args) {
-		
 		new GUI();
-		
-		
+	}
+
+	public static GUI getInstance() {
+		if(guiInstance == null) {
+			guiInstance = new GUI();
+		}
+		return guiInstance;
 	}
 	
+	
 	public GUI() {
+		
+		if(guiInstance != null) {
+			return;
+		}
+		
 		createWindow();
 		createTextArea();
 		createMenuBar();
