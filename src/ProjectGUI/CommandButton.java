@@ -7,13 +7,17 @@ public class CommandButton {
 	Command Save;
 	Command SaveAs;
 	Command Exit;
+	Command Undo;
+	Command Redo;
 	
-	public CommandButton(Command openCommand, Command newCommand, Command saveCommand, Command saveAsCommand, Command exitCommand) {
+	public CommandButton(Command openCommand, Command newCommand, Command saveCommand, Command saveAsCommand, Command exitCommand,Command undoCommand, Command redoCommand) {
 		this.Open = openCommand;
 		this.newCommand = newCommand; 
 		this.Save = saveCommand;
 		this.SaveAs = saveAsCommand;
 		this.Exit = exitCommand;
+		this.Undo = undoCommand;
+		this.Redo = redoCommand;
 	}
 
 	public void NewFile() {
@@ -34,6 +38,14 @@ public class CommandButton {
 	
 	public void ExitFile() {
 		Exit.execute();
+	}
+	
+	public void UndoFile() {
+		Undo.execute();
+	}
+	
+	public void RedoFile() {
+		Redo.execute();
 	}
 
 }

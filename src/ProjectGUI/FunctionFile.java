@@ -19,6 +19,7 @@ public class FunctionFile implements Functions{
 	}
 	
 	// creates new text file with empty lines
+	@Override
 	public void newFile() {
 		gui.textArea.setText("");
 		gui.window.setTitle("New");
@@ -27,6 +28,7 @@ public class FunctionFile implements Functions{
 	}
 	
 	// open file and read file line by line
+	@Override
 	public void open() {
 		FileDialog fd = new FileDialog(gui.window,"Open",FileDialog.LOAD);
 		fd.setVisible(true);
@@ -61,6 +63,7 @@ public class FunctionFile implements Functions{
 	}
 	
 	// update text file on window frame
+	@Override
 	public void save() {
 		if(fileName == null) {
 			saveAs();
@@ -80,6 +83,7 @@ public class FunctionFile implements Functions{
 	}
 	
 	// save file with given directory and fileName
+	@Override
 	public void saveAs() {
 		FileDialog fd = new FileDialog(gui.window,"Save",FileDialog.SAVE);
 		fd.setVisible(true);
@@ -102,8 +106,19 @@ public class FunctionFile implements Functions{
 		
 	}
 	
+	@Override
 	public void exit() {
 		System.exit(0);
+	}
+	
+	@Override
+	public void undo() {
+		gui.um.undo();
+	}
+	
+	@Override
+	public void redo() {
+		gui.um.redo();
 	}
 
 }
