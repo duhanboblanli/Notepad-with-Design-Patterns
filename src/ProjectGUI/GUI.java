@@ -35,6 +35,8 @@ public class GUI implements ActionListener {
 	// format menu
 	JMenuItem iWrap,iFontArial,iFontCSMS,iFontSize8,iFontSize12,iFontSize16,iFontSize20,iFontSize24,iFontSize28;
 	JMenu menuFont,menuFontSize;
+	// color menu
+	JMenuItem iColor1,iColor2,iColor3;
 
 	Function_Format format = new Function_Format.FunctionFormatBuilder(this)
 			.setFontType("Arial")
@@ -53,7 +55,8 @@ public class GUI implements ActionListener {
 
 	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand,UndoCommand,RedoCommand);
 	UndoManager um = new UndoManager();
-
+	
+	Function_Color color = new Function_Color(this);
 	public static void main(String[] args) {
 		new GUI();
 	}
@@ -67,9 +70,13 @@ public class GUI implements ActionListener {
 		createFileMenu();
 		createEditMenu();
 		createFormatMenu();
-		// default settings for format
+		createColorMenu();
+		color.changeColor("Blue");
+		
 		window.setVisible(true);
 	}
+
+	
 
 	public void createWindow() {
 
@@ -207,6 +214,25 @@ public class GUI implements ActionListener {
 		iFontSize28.setActionCommand("size28");
 		menuFontSize.add(iFontSize28);
 	}
+	
+	public void createColorMenu() {
+		
+		iColor1 = new JMenuItem("White");
+		iColor1.addActionListener(this);
+		iColor1.setActionCommand("White");
+		menuColor.add(iColor1);
+		
+		iColor2 = new JMenuItem("Black");
+		iColor2.addActionListener(this);
+		iColor2.setActionCommand("Black");
+		menuColor.add(iColor2);
+		
+		iColor3 = new JMenuItem("Blue");
+		iColor3.addActionListener(this);
+		iColor3.setActionCommand("Blue");
+		menuColor.add(iColor3);
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -231,6 +257,12 @@ public class GUI implements ActionListener {
 			case "size20" : format.setFontSize(20); break;
 			case "size24" : format.setFontSize(24); break;
 			case "size28" : format.setFontSize(28); break;
+			case "White": color.changeColor(command);break;
+			case "Black": color.changeColor(command);break;
+			case "Blue": color.changeColor(command);break;
+
+			
+			
 
 		}
 	}

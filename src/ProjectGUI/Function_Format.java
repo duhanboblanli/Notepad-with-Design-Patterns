@@ -59,5 +59,4 @@ public class Function_Format {
 		gui.textArea.setFont(font);
 	}
 
-	// Other methods go here
 }
