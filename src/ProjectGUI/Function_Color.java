@@ -14,19 +14,13 @@ public class Function_Color {
 		
 		switch(color) {
 		case "White":
-			gui.window.getContentPane().setBackground(Color.white);
-			gui.textArea.setBackground(Color.white);
-			gui.textArea.setForeground(Color.black);
+			gui.ChangeTextAndBackColor(Color.white, Color.white, Color.black);
 			break;
 		case "Black":
-			gui.window.getContentPane().setBackground(Color.black);
-			gui.textArea.setBackground(Color.black);
-			gui.textArea.setForeground(Color.white);
+			gui.ChangeTextAndBackColor(Color.black, Color.black, Color.white);
 			break;
 		case "Blue":
-			gui.window.getContentPane().setBackground(new Color(28,186,186));
-			gui.textArea.setBackground(new Color(28,186,186));
-			gui.textArea.setForeground(Color.white);
+			gui.ChangeTextAndBackColor(new Color(28,186,186), new Color(28,186,186), Color.white);
 			break;
 		}
 	}

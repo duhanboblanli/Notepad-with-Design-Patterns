@@ -69,6 +69,7 @@ public class GUI implements ActionListener {
 		createEditMenu();
 		createFormatMenu();
 		createColorMenu();
+		
 		color.changeColor("Blue");
 		window.setVisible(true);
 	}
@@ -261,6 +262,12 @@ public class GUI implements ActionListener {
 
 		}
 	}
+	public void ChangeTextAndBackColor(Color backgroundColor, Color textBackground , Color textForeground ) {
+		window.getContentPane().setBackground(backgroundColor);
+		textArea.setBackground(textBackground);
+		textArea.setForeground(textForeground);
+	}
+
 
 
 }
