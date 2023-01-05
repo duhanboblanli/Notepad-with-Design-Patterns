@@ -43,14 +43,16 @@ public class GUI implements ActionListener {
 			.build();
 	// integration between Function File class and GUI classes
 	FunctionFile funcs = new FunctionFile(this);
+	
+	CommandFactory cm = new CommandFactory();
 	// // integration between Function Format class and GUI classes
-	Command openCommand = new OpenFile(funcs);
-	Command newCommand = new NewFile(funcs);
-	Command exitCommand = new ExitFile(funcs);
-	Command SaveAsCommand = new SaveAsFile(funcs);
-	Command SaveCommand = new SaveFile(funcs);
-	Command UndoCommand = new UndoFile(funcs);
-	Command RedoCommand = new RedoFile(funcs);
+	Command openCommand = cm.getCommand("Open", funcs);
+	Command newCommand = cm.getCommand("New", funcs);
+	Command exitCommand = cm.getCommand("Exit", funcs);
+	Command SaveAsCommand = cm.getCommand("Save As", funcs);
+	Command SaveCommand = cm.getCommand("Save", funcs);
+	Command UndoCommand = cm.getCommand("Undo", funcs);
+	Command RedoCommand = cm.getCommand("Redo", funcs);
 
 	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand,UndoCommand,RedoCommand);
 	UndoManager um = new UndoManager();
@@ -69,7 +71,6 @@ public class GUI implements ActionListener {
 		createEditMenu();
 		createFormatMenu();
 		createColorMenu();
-		
 		color.changeColor("Blue");
 		window.setVisible(true);
 	}
