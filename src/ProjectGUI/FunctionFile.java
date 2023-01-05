@@ -9,12 +9,13 @@ import java.io.FileWriter;
 public class FunctionFile implements Functions{
 	
 	GUI gui;
+	FileDataOperations FileData = FileDataOperations.getInstance();
 	// fields of information needed to save or open files
-	String fileName;
-	String fileAdress;
+	
 	
 	// integration between Function File and GUI classes
 	public FunctionFile(GUI gui) {
+		FileDataOperations.getInstance();
 		this.gui = gui;
 	}
 	
@@ -23,8 +24,8 @@ public class FunctionFile implements Functions{
 	public void newFile() {
 		gui.textArea.setText("");
 		gui.window.setTitle("New");
-		fileName = null;
-		fileAdress = null;
+		FileData.SetNullFileNameAndAdress();
+		
 	}
 	
 	// open file and read file line by line
@@ -34,16 +35,15 @@ public class FunctionFile implements Functions{
 		fd.setVisible(true);
 		
 		if(fd.getFile() != null) {
-			fileName = fd.getFile();
-			fileAdress = fd.getDirectory();
-			gui.window.setTitle(fileName);
+			FileData.SetFileNameAndAdress(fd.getFile(), fd.getDirectory());
+			gui.window.setTitle(FileData.currentFileName);
 		}
 		
 		try {
 			
 			// a class which reads text from a character-input stream
 			// you need to address to read a file, fileAdress + fileName used for key
-			BufferedReader br = new BufferedReader(new FileReader(fileAdress + fileName));
+			BufferedReader br = new BufferedReader(new FileReader(FileData.currentFileAdress + FileData.currentFileName));
 			gui.textArea.setText(" ");
 			
 			String line = null;
@@ -65,15 +65,15 @@ public class FunctionFile implements Functions{
 	// update text file on window frame
 	@Override
 	public void save() {
-		if(fileName == null) {
+		if(FileData.currentFileName == null) {
 			saveAs();
 		}
 		else {
 			try {
 				//fileAdress + fileName used for key
-				FileWriter fw = new FileWriter(fileAdress + fileName);
+				FileWriter fw = new FileWriter(FileData.currentFileAdress + FileData.currentFileName);
 				fw.write(gui.textArea.getText());
-				gui.window.setTitle(fileName);
+				gui.window.setTitle(FileData.currentFileName);
 				fw.close();
 			}
 			catch(Exception e) {
@@ -89,14 +89,13 @@ public class FunctionFile implements Functions{
 		fd.setVisible(true);
 		
 		if(fd.getFile() != null) {
-			fileName = fd.getFile();
-			fileAdress = fd.getDirectory();
-			gui.window.setTitle(fileName);
+			FileData.SetFileNameAndAdress(fd.getFile(), fd.getDirectory());
+			gui.window.setTitle(FileData.currentFileName);
 		}
 		
 		try {
 			//fileAdress + fileName used for key
-			FileWriter fw = new FileWriter(fileAdress + fileName);
+			FileWriter fw = new FileWriter(FileData.currentFileAdress + FileData.currentFileName);
 			fw.write(gui.textArea.getText());
 			fw.close();
 			
