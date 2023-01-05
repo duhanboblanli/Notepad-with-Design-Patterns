@@ -38,10 +38,9 @@ public class GUI implements ActionListener {
 	// color menu
 	JMenuItem iColor1,iColor2,iColor3;
 
-	Function_Format format = new Function_Format.FunctionFormatBuilder(this)
+	Function_Format format = new FunctionFormatBuilder(this)
 			.setFontType("Arial")
 			.build();
-
 	// integration between Function File class and GUI classes
 	FunctionFile funcs = new FunctionFile(this);
 	// // integration between Function Format class and GUI classes
@@ -55,7 +54,7 @@ public class GUI implements ActionListener {
 
 	CommandButton button = new CommandButton(openCommand,newCommand,SaveCommand,SaveAsCommand,exitCommand,UndoCommand,RedoCommand);
 	UndoManager um = new UndoManager();
-	
+
 	Function_Color color = new Function_Color(this);
 	public static void main(String[] args) {
 		new GUI();
@@ -63,7 +62,6 @@ public class GUI implements ActionListener {
 
 	// empty constructor method
 	public GUI() {
-
 		createWindow();
 		createTextArea();
 		createMenuBar();
@@ -72,11 +70,10 @@ public class GUI implements ActionListener {
 		createFormatMenu();
 		createColorMenu();
 		color.changeColor("Blue");
-		
 		window.setVisible(true);
 	}
 
-	
+
 
 	public void createWindow() {
 
@@ -214,24 +211,24 @@ public class GUI implements ActionListener {
 		iFontSize28.setActionCommand("size28");
 		menuFontSize.add(iFontSize28);
 	}
-	
+
 	public void createColorMenu() {
-		
+
 		iColor1 = new JMenuItem("White");
 		iColor1.addActionListener(this);
 		iColor1.setActionCommand("White");
 		menuColor.add(iColor1);
-		
+
 		iColor2 = new JMenuItem("Black");
 		iColor2.addActionListener(this);
 		iColor2.setActionCommand("Black");
 		menuColor.add(iColor2);
-		
+
 		iColor3 = new JMenuItem("Blue");
 		iColor3.addActionListener(this);
 		iColor3.setActionCommand("Blue");
 		menuColor.add(iColor3);
-		
+
 	}
 
 	@Override
@@ -250,7 +247,7 @@ public class GUI implements ActionListener {
 			// function format instance --> format
 			case "Word Wrap": format.wordWrap(); break;
 			case "Arial": format.setFontType(command);break;
-			case "Comic Sans MS": format.setFontType(command);break;
+			case "Comic Sans MS": format.setFontType(command) ;break;
 			case "size8" : format.setFontSize(8); break;
 			case "size12" : format.setFontSize(12); break;
 			case "size16" : format.setFontSize(16); break;
@@ -261,8 +258,6 @@ public class GUI implements ActionListener {
 			case "Black": color.changeColor(command);break;
 			case "Blue": color.changeColor(command);break;
 
-			
-			
 
 		}
 	}

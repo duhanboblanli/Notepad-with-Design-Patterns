@@ -6,32 +6,9 @@ public class Function_Format {
 	private GUI gui;
 	private Font font;
 
-	private Function_Format(FunctionFormatBuilder builder) {
+	public Function_Format(FunctionFormatBuilder builder) {
 		this.gui = builder.gui;
 		this.font = builder.font;
-
-	}
-
-	public static class FunctionFormatBuilder {
-		private GUI gui;
-		private Font font;
-
-		public FunctionFormatBuilder(GUI gui) {
-			this.gui = gui;
-		}
-
-		public FunctionFormatBuilder setFontType(String fontType) {
-			if (font == null) {
-				font = new Font(fontType, Font.PLAIN, 14);
-			} else {
-				font = new Font(fontType, font.getStyle(), font.getSize());
-			}
-			return this;
-		}
-		public Function_Format build() {
-			return new Function_Format(this);
-		}
-
 	}
 
 	public void wordWrap() {
