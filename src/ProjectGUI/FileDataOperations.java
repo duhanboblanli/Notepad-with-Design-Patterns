@@ -10,7 +10,6 @@ public class FileDataOperations {
     // Declaring a variable of type String
     public String currentFileName;
 	public String currentFileAdress;
-	public String currentColor;
 	
 	public void SetNullFileNameAndAdress() {
 		currentFileName = null;

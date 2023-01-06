@@ -1,8 +1,6 @@
 package ProjectGUI;
 
 public class CommandFactory {
-	
-	
 	public Command getCommand(String commandType, FunctionFile func){
 	      if(commandType == null){
 	         return null;
@@ -34,7 +32,6 @@ public class CommandFactory {
 	      
 	      return null;
 	   }
-	
 }
 
 
